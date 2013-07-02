@@ -33,10 +33,16 @@ def keygen(mobile,char=False):
     
     keygen = random.sample(key_range,6)
     
-    db.users.insert({"mobile":mobile,"key":keygen,"status":"0"})
+    db.users.insert({"mobile":mobile,"key":keygen,"status":"0","send":True})
     
     return ''.join(keygen)
 
 @register()
 def checksent(mobile):
-    pass
+    row = db.user.find_one({"mobile":mobile})
+    if not row:
+        return False
+    if row.get('send'):
+        return True
+    else:
+        return False
