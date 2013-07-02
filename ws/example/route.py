@@ -19,10 +19,10 @@ def send():
         sv = soap.service.check_sent(mobile)
         
         if sv == '3':
-            action = soap.service.keygen(mobile,True)
+            action = soap.service.keygen(mobile)
             msg = 'key generated and sent to your phone'
         else:
-            action = soap.service.resend(mobile)
+            action = soap.service.keygen(mobile)
             msg = 'key resent to your phone'
         return msg
     return render_template('send.html')
