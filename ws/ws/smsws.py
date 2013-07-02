@@ -73,6 +73,10 @@ def check_key(mobile,key):
 
 @register()
 def resend(mobile):
+    
+    if not mobile:
+        return False
+    
     row = db.users.find_one({"mobile":mobile})
     if not row:
         return 3
