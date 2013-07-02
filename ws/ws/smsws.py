@@ -46,3 +46,16 @@ def checksent(mobile):
         return True
     else:
         return False
+
+@register()    
+def check_key(mobile,key):
+    row = db.users.find({"mobile":mobile})
+    if not row:
+        return 3
+    
+    if row.get('key') != key:
+        return False
+    
+    db.users.remove({"mobile":mobile},safe=True)
+    
+    return True
