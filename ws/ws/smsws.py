@@ -64,7 +64,7 @@ def check_sent(mobile):
 
 @register()
 def check_key(mobile,key):
-    row = db.users.find({"mobile":mobile})
+    row = db.users.find_one({"mobile":mobile})
     if not row:
         return 3
     
