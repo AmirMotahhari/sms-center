@@ -38,7 +38,7 @@ def keygen(mobile,char=False):
     return ''.join(keygen)
 
 @register()
-def checksent(mobile):
+def check_sent(mobile):
     row = db.user.find_one({"mobile":mobile})
     if not row:
         return False
