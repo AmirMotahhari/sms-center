@@ -38,7 +38,7 @@ def keygen(mobile,char=False):
     
     keygen = ''.join(keygen)
     
-    #send_id = send(mobile,keygen)
+    send_id = True#send(mobile,keygen)
     return keygen
     
     if not send_id:
@@ -70,3 +70,14 @@ def check_key(mobile,key):
     db.users.remove({"mobile":mobile},safe=True)
     
     return True
+
+@register()
+def resend(mobile):
+    row = db.users.find_one({"mobile":mobile})
+    if not row:
+        return 3
+    
+    send = True #send(mobile,row.get('key'))
+    if send:
+        return True
+    return False
