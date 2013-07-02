@@ -3,6 +3,7 @@
 from pyws.server import SoapServer
 from pyws.functions.register import register
 from pymongo.connection import Connection
+from ws.smslib import send
 
 try:
     con = Connection('127.0.0.1',27017)
@@ -33,9 +34,16 @@ def keygen(mobile,char=False):
     
     keygen = random.sample(key_range,6)
     
-    db.users.insert({"mobile":mobile,"key":keygen,"status":"0","send":True})
+    keygen = ''.join(keygen)
     
-    return ''.join(keygen)
+    send_id = send(mobile,keygen)
+    
+    if not send_id:
+        return False
+    
+    db.users.insert({"mobile":mobile,"key":keygen,"status":"0","send":True,"send_id":send_id})
+    
+    return True
 
 @register()
 def check_sent(mobile):
@@ -47,7 +55,7 @@ def check_sent(mobile):
     else:
         return False
 
-@register()    
+@register()
 def check_key(mobile,key):
     row = db.users.find({"mobile":mobile})
     if not row:
