@@ -39,21 +39,22 @@ def keygen(mobile,char=False):
     keygen = ''.join(keygen)
     
     send_id = True#send(mobile,keygen)
-    return keygen
     
     if not send_id:
         return False
     
     row = db.users.find_one({"mobile":mobile})
+
     if not row:
-        db.users.insert({"mobile":mobile,"key":keygen,"status":"0","send":True,"send_id":send_id})
+        db.users.insert({"mobile":mobile,"key":keygen,"status":"0","send":True,"send_id":send_id},safe=True)
     else:
-        db.users.update({"mobile":mobile},{"key":keygen},safe=True)
+        row['key'] = keygen
+        db.users.update({"mobile":mobile},row,safe=True)
     return True
 
 @register()
 def check_sent(mobile):
-    row = db.user.find_one({"mobile":mobile})
+    row = db.users.find_one({"mobile":mobile})
     if not row:
         return 3
     if row.get('send'):
@@ -76,7 +77,6 @@ def check_key(mobile,key):
 
 @register()
 def resend(mobile):
-    
     if not mobile:
         return False
     
