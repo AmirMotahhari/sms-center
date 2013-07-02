@@ -74,17 +74,3 @@ def check_key(mobile,key):
     db.users.remove({"mobile":mobile},safe=True)
     
     return True
-
-@register()
-def resend(mobile):
-    if not mobile:
-        return False
-    
-    row = db.users.find_one({"mobile":mobile})
-    if not row:
-        return 3
-    
-    send = True #send(mobile,row.get('key'))
-    if send:
-        return True
-    return False
