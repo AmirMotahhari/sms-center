@@ -10,8 +10,16 @@ except Exception:
     
 from flask import Flask,render_template
 
-app = Flask(__main__)
+app = Flask(__name__)
 
 @app.route('/')
-def login():
-    return render_template('login.html')
+def send():
+    return render_template('send.html')
+
+@app.route('/verify')
+def verify():
+    return render_template('verify.html')
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
