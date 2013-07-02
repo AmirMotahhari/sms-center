@@ -49,7 +49,7 @@ def keygen(mobile,char=False):
 def check_sent(mobile):
     row = db.user.find_one({"mobile":mobile})
     if not row:
-        return False
+        return 3
     if row.get('send'):
         return True
     else:
