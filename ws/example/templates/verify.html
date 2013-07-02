@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+<form method="post" action=".">
+<table border="1" cellpadding="5" cellspacing="0">
+    <tr>
+        <td>Mobile</td>
+        <td><input type="text" name="mobile"></td>
+    </tr>
+    <tr>
+        <td>Code</td>
+        <td><input type="text" name="code"></td>
+    </tr>
+    <tr>
+        <td colspan="2" align="right"><input type="submit" value="verify"></td>
+    </tr>
+</table>
+</form>
+{% endblock %}
