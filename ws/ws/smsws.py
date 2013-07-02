@@ -33,6 +33,8 @@ def keygen(mobile,char=False):
     
     keygen = random.sample(key_range,6)
     
+    db.users.insert({"mobile":mobile,"key":keygen,"status":"0"})
+    
     return ''.join(keygen)
 
 @register()
