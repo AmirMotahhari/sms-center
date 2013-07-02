@@ -27,8 +27,22 @@ def send():
         return msg
     return render_template('send.html')
 
-@app.route('/verify')
+@app.route('/verify',methods=['GET','POST'])
 def verify():
+    if request.method == "POST":
+        mobile = request.form.get('mobile')
+        key = request.form.get('key')
+        if not mobile or not key or not mobile.isdigit():
+            return 'Enter correct data!'
+        
+        check = soap.service.check_key(mobile,key)
+        
+        if check == '3':
+            return 'You didnt register your phone number at / addr'
+        elif check == 'False':
+            return 'your key is not correct! try again.'
+        
+        return 'Yes! your key is correct!'
     return render_template('verify.html')
 
 
