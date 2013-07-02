@@ -17,8 +17,14 @@ def send():
     if request.method == 'POST':
         mobile = request.form.get('mobile')
         sv = soap.service.check_sent(mobile)
-        if sv == 3:
-            soap.service.
+        
+        if sv == '3':
+            action = soap.service.keygen(mobile,True)
+            msg = 'key generated and sent to your phone'
+        else:
+            action = soap.service.resend(mobile)
+            msg = 'key resent to your phone'
+        return msg
     return render_template('send.html')
 
 @app.route('/verify')
