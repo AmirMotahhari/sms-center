@@ -8,7 +8,7 @@ import sys
 
 try:
     con = Connection('127.0.0.1',27017)
-    db = con.smskeygen
+    db = con['smskeygen']
 except:
     print 'dbconnection failed'
     sys.exit()
@@ -44,8 +44,11 @@ def keygen(mobile,char=False):
     if not send_id:
         return False
     
-    db.users.insert({"mobile":mobile,"key":keygen,"status":"0","send":True,"send_id":send_id})
-    
+    row = db.users.find_one({"mobile":mobile})
+    if not row:
+        db.users.insert({"mobile":mobile,"key":keygen,"status":"0","send":True,"send_id":send_id})
+    else:
+        db.users.update({"mobile":mobile},{"key":keygen},safe=True)
     return True
 
 @register()
