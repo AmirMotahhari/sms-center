@@ -5,12 +5,13 @@ from pyws.functions.register import register
 from pymongo.connection import Connection
 from ws.smslib import send
 import sys
+from settings import logging
 
 try:
     con = Connection('127.0.0.1',27017)
     db = con['smskeygen']
 except:
-    print 'dbconnection failed'
+    logging.error('db connection error')
     sys.exit()
 
 server = SoapServer(
@@ -38,7 +39,7 @@ def keygen(mobile,char=False):
     
     keygen = ''.join(keygen)
     
-    send_id = True#send(mobile,keygen)
+    send_id = send(mobile,keygen)
     
     if not send_id:
         return False
