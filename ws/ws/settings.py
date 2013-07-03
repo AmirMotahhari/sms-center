@@ -1,13 +1,16 @@
 # Django settings for ws project.
 import os
+import logging
+
 DEBUG = True
 
 SERVICE_URL = 'http://127.0.0.1:8000/api/wsdl'
 SERVICE_USERNAME = 'username'
 SERVICE_PASSWORD = 'password'
 SERVICE_ID = 'free'
-
+LOG_FILE = 'error.log'
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
+logging.basicConfig(filename=LOG_FILE,level=logging.ERROR)
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
