@@ -1,7 +1,12 @@
 # Django settings for ws project.
 import os
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+
+SERVICE_URL = 'http://127.0.0.1:8000/api/wsdl'
+SERVICE_USERNAME = 'username'
+SERVICE_PASSWORD = 'password'
+SERVICE_ID = 'free'
+
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -68,6 +73,16 @@ WSGI_APPLICATION = 'ws.wsgi.application'
 
 
 WEB_SERVICE = {
-    "service" : "SendMessage",
-    "argv" : ('myusername','mypassword','{message}','{mobile}','serviceid'),  # order is too important! {} are just for message and mobile!!!
+    "connect": {
+        "url" : SERVICE_URL,
+        "argv" : (SERVICE_USERNAME,SERVICE_PASSWORD), # order is too important!
+    },
+    "step1": {
+        "service" : "Login",
+        "argv" : (SERVICE_USERNAME,SERVICE_PASSWORD), # order is too important!
+    },
+    "step2": {
+        "service" : "SendMessage",
+        "argv" : (SERVICE_USERNAME,SERVICE_PASSWORD,'{message}','{mobile}',SERVICE_ID),  # order is too important! {} are just for message and mobile!!!
+    },
 }
