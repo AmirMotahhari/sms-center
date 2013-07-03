@@ -65,3 +65,9 @@ ROOT_URLCONF = 'ws.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'ws.wsgi.application'
+
+
+WEB_SERVICE = {
+    "service" : "SendMessage",
+    "argv" : ('myusername','mypassword','{message}','{mobile}','serviceid'),  # order is too important! {} are just for message and mobile!!!
+}
