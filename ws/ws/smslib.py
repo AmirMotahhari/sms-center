@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 from suds.client import Client
-from settings import WEB_SERVICE
+from settings import WEB_SERVICE,logging
 
 if len(WEB_SERVICE['connect']['argv']):
     string_args = "('%s','%s')" % (WEB_SERVICE['connect']['url'],"','".join(WEB_SERVICE['connect']['argv']))
 else:
     string_args = "('%s')" % WEB_SERVICE['connect']['url']
-print string_args
 
 try:
     con = Client(string_args)
 except:
-    pass
+    logging.error('Soap connection error')
+    sys.exit()
 
 
 def send(mobile,message):
