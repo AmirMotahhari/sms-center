@@ -9,10 +9,10 @@ else:
     string_args = "('%s')" % WEB_SERVICE['connect']['url']
 
 try:
-    logging.info('soap:connecting : %s' % string_args)
     con = Client(string_args)
+    logging.info('soap:connect: %s' % string_args)
 except:
-    logging.error('Soap connection error %s' % string_args)
+    logging.error('soap:connect error: %s' % string_args)
     sys.exit()
 
 
@@ -20,8 +20,8 @@ def send(mobile,message):
     for i in WEB_SERVICE:
         if "step" in i:
             string_args = "%s.%s('%s')" % ('con.service',WEB_SERVICE[i]['service'],"','".join(WEB_SERVICE[i]['argv']).format(message=message,mobile=mobile))
-            logging.info('service:connecting : %s' % string_args)
             action = eval(string_args)
+            logging.info('service:connect: %s' % string_args)
             if not action:
                 return False
     if action:
