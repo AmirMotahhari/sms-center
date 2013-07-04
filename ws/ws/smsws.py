@@ -5,19 +5,19 @@ from pyws.functions.register import register
 from pymongo.connection import Connection
 from ws.smslib import send
 import sys
-from settings import logging
+from settings import *
 
 try:
-    con = Connection('127.0.0.1',27017)
-    db = con['smskeygen']
+    con = Connection(DATABASE_HOST,DATABASE_PORT)
+    db = con[DATABASE_NAME]
 except:
     logging.error('db connection error')
     sys.exit()
 
 server = SoapServer(
-    service_name = 'smsws',
-    tns = 'http://local.host',
-    location = 'http://localhost:8000/api/',
+    service_name = SOAP_NAME,
+    tns = SOAP_TNS,
+    location = SOAP_LOCATION,
 )
 
 @register()
