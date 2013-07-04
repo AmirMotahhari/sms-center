@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from suds.client import Client
 from settings import WEB_SERVICE,logging
+import sys
 
 if len(WEB_SERVICE['connect']['argv']):
     string_args = "('%s','%s')" % (WEB_SERVICE['connect']['url'],"','".join(WEB_SERVICE['connect']['argv']))
