@@ -10,12 +10,7 @@ SERVICE_PASSWORD = 'password'
 SERVICE_ID = 'free'
 LOG_FILE = 'error.log'
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
-logging.basicConfig(filename=LOG_FILE,level=logging.ERROR)
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
-
-MANAGERS = ADMINS
+logging.basicConfig(filename=LOG_FILE,level=logging.INFO)
 
 DATABASES = {
     'default': {
