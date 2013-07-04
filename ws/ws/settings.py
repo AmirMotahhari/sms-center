@@ -4,25 +4,28 @@ import logging
 
 DEBUG = True
 
-SERVICE_URL = 'http://127.0.0.1:8000/api/wsdl'
+# Sms center settings
+SERVICE_URL = 'http://localhost/'
 SERVICE_USERNAME = 'username'
 SERVICE_PASSWORD = 'password'
 SERVICE_ID = 'free'
-LOG_FILE = 'error.log'
+
+# Logging settings
+LOG_FILE = 'sms_log' # you can add dir+filename like /var/log/sms/sms_log
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 logging.basicConfig(filename=LOG_FILE,level=logging.INFO)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'test',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'root',
-        'PASSWORD': '136',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
-}
+# Database settings
+DATABASE_HOST = '127.0.0.1'
+DATABASE_PORT = 27017
+DATABASE_USE = ''
+DATABASE_PASS = ''
+DATABASE_NAME = 'smskeygen'
+
+# Soap settings
+SOAP_NAME = 'smskeygen'
+SOAP_TNS = 'http://local.host'
+SOAP_LOCATION = 'http://127.0.0.1:8000/api/'
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -69,7 +72,13 @@ ROOT_URLCONF = 'ws.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'ws.wsgi.application'
 
-
+# Web service settings for connecting to SMS center
+# connect : for connecting to web service
+# step(int) : for connecting to services. some SMS centers have login service before sending
+# and some others just have calling service name with username and password. So you can do it:
+# "step1:" { "service":"sendmsg","argv" : (SERVICE_USERNAME,SERVICE_PASSWORD,{message},{mobile}) }
+# Any things depends on the API of SMS centers. So please read cerfully DEV doc of SMS center!
+# You can add more steps or remove other steps. One step in nessesery for running!
 WEB_SERVICE = {
     "connect": {
         "url" : SERVICE_URL,
