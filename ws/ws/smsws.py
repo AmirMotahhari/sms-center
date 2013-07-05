@@ -22,7 +22,10 @@ server = SoapServer(
 )
 
 @register()
-def keygen(mobile,char=False):
+def keygen(username=None,password=None,mobile,char=False):
+    if not username or not password:
+        return 403
+    #implementing 401
     if not mobile.isdigit():
         logging.warning("keygen:invalid mobile: %s" % mobile)
         return False
@@ -58,7 +61,10 @@ def keygen(mobile,char=False):
     return True
 
 @register()
-def check_sent(mobile):
+def check_sent(username=None,password=None,mobile):
+    if not username or not password:
+        return 403
+    #implementing 401
     row = db.users.find_one({"mobile":mobile})
     if not row:
         logging.warning("check_sent:not found mobile: %s" % mobile)
@@ -71,7 +77,10 @@ def check_sent(mobile):
         return False
 
 @register()
-def check_key(mobile,key):
+def check_key(username=None,password=None,mobile,key):
+    if not username or not password:
+        return 403
+    #implementing 401
     row = db.users.find_one({"mobile":mobile})
     if not row:
         logging.warning("check_key:not found mobile: %s" % mobile)
