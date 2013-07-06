@@ -26,6 +26,9 @@ def keygen(username=None,password=None,mobile,char=False):
     if not username or not password:
         return 403
     #implementing 401
+    auth = db.accounts.find_one({"username":username,"password":password})
+    if not auth:
+        return 401
     if not mobile.isdigit():
         logging.warning("keygen:invalid mobile: %s" % mobile)
         return False
@@ -65,6 +68,9 @@ def check_sent(username=None,password=None,mobile):
     if not username or not password:
         return 403
     #implementing 401
+    auth = db.accounts.find_one({"username":username,"password":password})
+    if not auth:
+        return 401
     row = db.users.find_one({"mobile":mobile})
     if not row:
         logging.warning("check_sent:not found mobile: %s" % mobile)
@@ -81,6 +87,9 @@ def check_key(username=None,password=None,mobile,key):
     if not username or not password:
         return 403
     #implementing 401
+    auth = db.accounts.find_one({"username":username,"password":password})
+    if not auth:
+        return 401
     row = db.users.find_one({"mobile":mobile})
     if not row:
         logging.warning("check_key:not found mobile: %s" % mobile)
