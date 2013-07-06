@@ -22,7 +22,7 @@ server = SoapServer(
 )
 
 @register()
-def keygen(username=None,password=None,mobile,char=False):
+def keygen(username,password,mobile,char=False):
     if not username or not password:
         return 403
     #implementing 401
@@ -64,7 +64,7 @@ def keygen(username=None,password=None,mobile,char=False):
     return True
 
 @register()
-def check_sent(username=None,password=None,mobile):
+def check_sent(username,password,mobile):
     if not username or not password:
         return 403
     #implementing 401
@@ -83,7 +83,7 @@ def check_sent(username=None,password=None,mobile):
         return False
 
 @register()
-def check_key(username=None,password=None,mobile,key):
+def check_key(username,password,mobile,key):
     if not username or not password:
         return 403
     #implementing 401
