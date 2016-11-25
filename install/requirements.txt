@@ -1,0 +1,7 @@
+aiozmq==0.7.1
+msgpack-python==0.4.8
+python-memcached==1.58
+pyzmq==16.0.2
+redis==2.10.5
+six==1.10.0
+tornado==4.4.2
