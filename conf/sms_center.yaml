@@ -1,0 +1,31 @@
+# ============== SMS Center Main Config File ============== #
+# Before changing any thing take care about these notes:
+# 1. If auto_reload option is in 'On' mode, then any changes
+#    at here will be affected without restarting the services.
+# 2. Take care about auto_update option which is automatically
+#    upgrade the whole services and will restart them.
+#
+# Data storage of SMS and tokens
+# service would be 'redis' or 'memcached'
+Storage:
+    service: redis
+    server: 127.0.0.1
+    port: 6379
+    password:
+#
+# Upgrade the services
+Upgrade:
+    auto_upgrade: false
+    server: https://github.com/Mortezaipo/SMS-Center
+#
+# SMS Workers
+# If you need maximum usage, set workers to '0'.
+# but take care, it will get many CPU usage.
+Process:
+    workers: 100
+#
+# TCP Port to get commands
+Listener:
+    port: 13000
+    white_list:
+        - 127.0.0.1
