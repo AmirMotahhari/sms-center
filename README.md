@@ -5,4 +5,4 @@ A service for **sending** & **receiving** SMS
 ##_Under construction..._
 
 #####Project Structure
-![Project Structure](data/structure.jpg)
+![Project Structure](data/structure.png)
